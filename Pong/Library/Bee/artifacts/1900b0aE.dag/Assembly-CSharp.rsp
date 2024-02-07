@@ -354,6 +354,8 @@
 -analyzer:"D:/Unity/Unity Files/2022.3.18f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/MoveBall.cs"
 "Assets/Scripts/Paddle.cs"
+"Assets/Scripts/PaddleCollision.cs"
+"Assets/Scripts/PaddleMovement.cs"
 "Assets/Scripts/PointCounter.cs"
 -langversion:9.0
 

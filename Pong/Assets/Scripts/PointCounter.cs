@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PointCounter : MonoBehaviour
 {
-    private int _playerLeftScore;
-    private int _playerRightScore;
+    private static int _playerLeftScore;
+    private static int _playerRightScore;
     
     void Start()
     {
@@ -20,13 +20,21 @@ public class PointCounter : MonoBehaviour
         if (other.transform.position.z < 0)
         {
             _playerRightScore++;
-            Debug.Log("Right player score: " + _playerRightScore);
+            Debug.Log($"Right player score ({_playerLeftScore} - {_playerRightScore})");
         }
         else
         {
             _playerLeftScore++;
-            Debug.Log("Left player score: " + _playerLeftScore);
+            Debug.Log($"Left player score ({_playerLeftScore} - {_playerRightScore})");
         }
+        
+        if (_playerLeftScore >= 11 || _playerRightScore >= 11)
+        {
+            Debug.Log("Game over");
+            _playerLeftScore = 0;
+            _playerRightScore = 0;
+        }
+        
         other.gameObject.GetComponent<MoveBall>().ResetPosition();
     }
 }

@@ -12,8 +12,8 @@ public class MoveBall : MonoBehaviour
     public float startSpeed = 10f;
     
     [Header("Paddle")]
-    public Paddle paddleLeft;
-    public Paddle paddleRight;
+    public GameObject paddleLeft;
+    public GameObject paddleRight;
     
     private Rigidbody _rb;
     private float _speed;
@@ -39,7 +39,7 @@ public class MoveBall : MonoBehaviour
     public void IncreaseSpeed()
     {
         _speed *= increaseSpeed;
-        Debug.Log("Speed increased to " + _speed);
+        //Debug.Log("Speed increased to " + _speed);
     }
     
     public void ResetPosition()
