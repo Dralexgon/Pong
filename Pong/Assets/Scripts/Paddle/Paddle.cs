@@ -16,10 +16,7 @@ public class Paddle : MonoBehaviour
     
     void Update()
     {
-        //V1
         transform.position += new Vector3(Input.GetAxis("Vertical") * speed * 4 * Time.deltaTime, 0, 0);
-        //Vector3 force = Vector3.right * (Input.GetAxis("Vertical") * speed);
-        //_rb.AddForce(force, ForceMode.Force);
     }
 
     private void OnCollisionEnter(Collision other)

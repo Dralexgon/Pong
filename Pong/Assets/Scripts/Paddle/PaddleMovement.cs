@@ -13,8 +13,8 @@ public class PaddleMovement : MonoBehaviour
     {
         Vector3 padLeftPos = paddleLeft.transform.position;
         Vector3 padRightPos = paddleRight.transform.position;
-        padLeftPos += new Vector3(Input.GetAxis("PaddleLeft") * speed * Time.deltaTime, 0, 0);
-        padRightPos += new Vector3(Input.GetAxis("PaddleRight") * speed * Time.deltaTime, 0, 0);
+        padLeftPos += new Vector3(Input.GetAxis("PaddleRight") * speed * Time.deltaTime, 0, 0);
+        padRightPos += new Vector3(Input.GetAxis("PaddleLeft") * speed * Time.deltaTime, 0, 0);
         
         if (padLeftPos.x > 4f)
         {

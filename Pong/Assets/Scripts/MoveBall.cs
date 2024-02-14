@@ -46,7 +46,7 @@ public class MoveBall : MonoBehaviour
     {
         transform.position = Vector3.zero;
         _speed = startSpeed;
-        _rb.AddForce(Vector3.forward * Random.Range(-100, 100), ForceMode.Force);
+        _rb.AddForce(Vector3.forward * 100, ForceMode.Force);
         
         paddleLeft.transform.position = _paddleLeftPosition;
         paddleRight.transform.position = _paddleRightPosition;
