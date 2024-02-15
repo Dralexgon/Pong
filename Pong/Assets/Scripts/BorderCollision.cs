@@ -8,7 +8,6 @@ public class BorderCollision : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Ball")) return;
         
-        MoveBall moveBall = other.gameObject.GetComponent<MoveBall>();
-        moveBall.ResetPosition();
+        MoveBall.ResetAllPositions();
     }
 }

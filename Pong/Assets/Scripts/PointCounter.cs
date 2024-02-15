@@ -35,6 +35,6 @@ public class PointCounter : MonoBehaviour
             _playerRightScore = 0;
         }
         
-        other.gameObject.GetComponent<MoveBall>().ResetPosition();
+        MoveBall.ResetAllPositions();
     }
 }

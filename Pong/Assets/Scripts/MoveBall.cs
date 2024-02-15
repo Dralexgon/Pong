@@ -20,9 +20,12 @@ public class MoveBall : MonoBehaviour
     
     private Vector3 _paddleLeftPosition;
     private Vector3 _paddleRightPosition;
+    
+    public static List<GameObject> Balls = new List<GameObject>();
 
     private void Start()
     {
+        Balls.Add(gameObject);
         _rb = GetComponent<Rigidbody>();
         _paddleLeftPosition = paddleLeft.transform.position;
         _paddleRightPosition = paddleRight.transform.position;
@@ -42,11 +45,21 @@ public class MoveBall : MonoBehaviour
         //Debug.Log("Speed increased to " + _speed);
     }
     
-    public void ResetPosition()
+    public static void ResetAllPositions()
+    {
+        Balls[0].GetComponent<MoveBall>().ResetPosition();
+        if (Balls.Count == 1) return;
+        Destroy(Balls[1]);
+        PowerUpNewBall.SpawnPowerUp();
+        PowerUpDestroyBall.SpawnPowerUp();
+        Balls.RemoveAt(1);
+    }
+    
+    private void ResetPosition()
     {
         transform.position = Vector3.zero;
         _speed = startSpeed;
-        _rb.AddForce(Vector3.forward * 100, ForceMode.Force);
+        _rb.AddForce(new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100)), ForceMode.Force);
         
         paddleLeft.transform.position = _paddleLeftPosition;
         paddleRight.transform.position = _paddleRightPosition;
