@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpDestroyBall : PowerUp
+public class PowerUpDestroyBall : MonoBehaviour
 {
-    protected static GameObject PowerUpGameObject;
+    private static GameObject _powerUpGameObject;
+    private AudioManager _audioManager;
     
     private GameObject _ballDisabled;
     
     private void Start()
     {
-        PowerUpGameObject = gameObject;
+        _powerUpGameObject = gameObject;
+        _audioManager = FindObjectOfType<AudioManager>();
         SpawnPowerUp();
     }
     
@@ -18,7 +20,7 @@ public class PowerUpDestroyBall : PowerUp
     {
         if (!other.gameObject.CompareTag("Ball")) return;
         
-        PowerUpGameObject.SetActive(false);
+        _powerUpGameObject.SetActive(false);
         if (MoveBall.Balls.Count > 1)
         {
             MoveBall.Balls.Remove(other.gameObject);
@@ -32,13 +34,14 @@ public class PowerUpDestroyBall : PowerUp
             Invoke(nameof(ResetAllPositions), 2f);
         }
         //particles effect
+        _audioManager.Play("BOOM");
     }
     
     public static void SpawnPowerUp()
     {
-        PowerUpGameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        PowerUpGameObject.SetActive(true);
-        PowerUpGameObject.transform.position = new Vector3(Random.Range(-4, 4), 0.5f, Random.Range(-6, 6));
+        _powerUpGameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _powerUpGameObject.SetActive(true);
+        _powerUpGameObject.transform.position = new Vector3(Random.Range(-4, 4), 0.5f, Random.Range(-6, 6));
     }
     
     private void ResetAllPositions()

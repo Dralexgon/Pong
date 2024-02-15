@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class PaddleCollision : MonoBehaviour
 {
+    private AudioManager _audioManager;
+    
+    private void Start()
+    {
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         //Debug.Log("Paddle hit " + other.gameObject.name);
@@ -32,5 +39,7 @@ public class PaddleCollision : MonoBehaviour
         
         MoveBall moveBall = other.gameObject.GetComponent<MoveBall>();
         moveBall.IncreaseSpeed();
+        
+        _audioManager.Play("PaddleBounce");
     }
 }

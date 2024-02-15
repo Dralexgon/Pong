@@ -11,9 +11,8 @@ public class MoveBall : MonoBehaviour
     public float increaseSpeed = 1.1f;
     public float startSpeed = 10f;
     
-    [Header("Paddle")]
-    public GameObject paddleLeft;
-    public GameObject paddleRight;
+    private GameObject _paddleLeft;
+    private GameObject _paddleRight;
     
     private Rigidbody _rb;
     private float _speed;
@@ -25,10 +24,13 @@ public class MoveBall : MonoBehaviour
 
     private void Start()
     {
+        _paddleLeft = GameObject.Find("PaddleLeft");
+        _paddleRight = GameObject.Find("PaddleRight");
+        
         Balls.Add(gameObject);
         _rb = GetComponent<Rigidbody>();
-        _paddleLeftPosition = paddleLeft.transform.position;
-        _paddleRightPosition = paddleRight.transform.position;
+        _paddleLeftPosition = _paddleLeft.transform.position;
+        _paddleRightPosition = _paddleRight.transform.position;
         ResetPosition();
     }
 
@@ -48,10 +50,10 @@ public class MoveBall : MonoBehaviour
     public static void ResetAllPositions()
     {
         Balls[0].GetComponent<MoveBall>().ResetPosition();
-        if (Balls.Count == 1) return;
-        Destroy(Balls[1]);
         PowerUpNewBall.SpawnPowerUp();
         PowerUpDestroyBall.SpawnPowerUp();
+        if (Balls.Count == 1) return;
+        Destroy(Balls[1]);
         Balls.RemoveAt(1);
     }
     
@@ -61,10 +63,10 @@ public class MoveBall : MonoBehaviour
         _speed = startSpeed;
         _rb.AddForce(new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100)), ForceMode.Force);
         
-        paddleLeft.transform.position = _paddleLeftPosition;
-        paddleRight.transform.position = _paddleRightPosition;
+        _paddleLeft.transform.position = _paddleLeftPosition;
+        _paddleRight.transform.position = _paddleRightPosition;
         
-        paddleLeft.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        paddleRight.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _paddleLeft.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _paddleRight.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }
